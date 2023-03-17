@@ -11,7 +11,7 @@ spec:
         spec:
           initContainers:
             - name: download-config
-              image: image-registry.openshift-image-registry.svc:5000/xdmod/xdmod-openstack
+              image: image-registry.openshift-image-registry.svc:5000/xdmod/xdmod-openstack:latest
           containers:
             - name: moc-xdmod
-              image: image-registry.openshift-image-registry.svc:5000/xdmod/moc-xdmod
+              image: image-registry.openshift-image-registry.svc:5000/xdmod/moc-xdmod:latest

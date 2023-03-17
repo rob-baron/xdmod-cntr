@@ -11,12 +11,15 @@ spec:
         spec:
           initContainers:
             - name: cj-init-xdmod-openstack
+              image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/xdmod-openstack:latest
               env:
                 - name: OPENSTACK_INSTANCE
                   value: "nerc-openstack"
           containers:
+            - name: xdmod-openstack-backup
+              image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/xdmod-openstack:latest
             - name: cj-xdmod-openstack
-              image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/moc-xdmod
+              image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/moc-xdmod:latest
               imagePullPolicy: Always
               command:
                 - xdmod-shredder
