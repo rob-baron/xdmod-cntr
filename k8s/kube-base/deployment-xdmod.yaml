@@ -74,6 +74,32 @@ spec:
               mountPath: /run/httpd
             - name: vol-php-session
               mountPath: /var/lib/php/session
+        - name: xdmod-backup-ui
+          image: xdmod-openstack:latest
+          resources:
+            requests:
+              memory: "1Gi"
+            limits:
+              memory: "2Gi"
+          imagePullPolicy: Always
+          command:
+            - /app/xdmod-store-to-db 
+            - --directories
+            - /etc/xdmod
+            - /etc/openstack
+            - /usr/share/xdmod
+          env:
+            - name: OPENSTACK_INSTANCE
+              value: "admin-kaizen"
+          volumeMounts:
+            - name: vol-backup-tmp-dir
+              mountPath: /tmp
+            - name: vol-xdmod-conf
+              mountPath: /etc/xdmod
+            - name: vol-xdmod-src
+              mountPath: /usr/share/xdmod
+            - name: vol-clouds-yaml
+              mountPath: /etc/openstack
       initContainers:
         - image: moc-xdmod-dev:latest
           name: xdmod-init-1
@@ -140,6 +166,8 @@ spec:
         - name: vol-run-httpd
           emptyDir: {}
         - name: vol-php-session
+          emptyDir: {}
+        - name: vol-backup-tmp-dir
           emptyDir: {}
         - name: vol-xdmod-init
           configMap:

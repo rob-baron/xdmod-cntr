@@ -12,7 +12,7 @@ spec:
         spec:
           initContainers:
             - name: cj-init-xdmod-openstack
-              image: xdmod-openstack
+              image: xdmod-openstack:latest
               resources:
                 requests:
                   memory: "1Gi"
@@ -36,8 +36,27 @@ spec:
                 - name: vol-openstack-data
                   mountPath: /data
           containers:
+            - name: xdmod-openstack-backup
+              image: xdmod-openstack:latest
+              resources:
+                requests:
+                  memory: "1Gi"
+                limits:
+                  memory: "2Gi"
+              imagePullPolicy: Always
+              command:
+                - /app/xdmod-store-to-db 
+              args:
+                ["--single_run", "--directories", "/data" ]
+              volumeMounts:
+                - name: vol-xdmod-conf
+                  mountPath: /etc/xdmod
+                - name: vol-openstack-data
+                  mountPath: /data
+                - name: vol-backup-tmp-dir
+                  mountPath: /tmp
             - name: cj-xdmod-openstack
-              image: moc-xdmod
+              image: moc-xdmod:latest
               imagePullPolicy: Always
               command:
                 - xdmod-shredder
@@ -67,6 +86,8 @@ spec:
             - name: vol-clouds-yaml
               emptyDir: {}
             - name: vol-var-log-xdmod
+              emptyDir: {}
+            - name: vol-backup-tmp-dir
               emptyDir: {}
             - name: vol-openstack-data
               persistentVolumeClaim:
