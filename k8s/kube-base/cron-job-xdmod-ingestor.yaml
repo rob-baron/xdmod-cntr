@@ -11,7 +11,7 @@ spec:
         spec:
           initContainers:
             - name: download-config
-              image: xdmod-openstack
+              image: xdmod-openstack:latest
               imagePullPolicy: IfNotPresent
               command:
                 - "/app/xdmod-get-config.sh"
@@ -26,7 +26,7 @@ spec:
                   mountPath: /var/log/xdmod
           containers:
             - name: moc-xdmod
-              image: moc-xdmod
+              image: moc-xdmod:latest
               imagePullPolicy: IfNotPresent
               command:
                 - "/usr/bin/xdmod-ingestor"
