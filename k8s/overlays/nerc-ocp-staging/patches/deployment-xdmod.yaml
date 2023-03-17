@@ -14,6 +14,10 @@ spec:
         component: xdmod-ui
     spec:
       containers:
+        - image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/xdmod-openstack:latest
+          name: xdmod-backup-ui
+        - image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/moc-xdmod:latest
+          name: xdmod-acl-work-a-round
         - image: image-registry.openshift-image-registry.svc:5000/xdmod-staging/moc-xdmod:latest
           name: xdmod
       initContainers:

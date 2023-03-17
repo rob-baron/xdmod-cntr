@@ -7,8 +7,7 @@ spec:
   source:
     type: Git
     git:
-      uri: https://github.com/rob-baron/xdmod-cntr.git
-      ref:  xdmodBackups
+      uri: https://github.com/CCI-MOC/xdmod-cntr.git
     contextDir: /
   strategy:
     type: Docker
