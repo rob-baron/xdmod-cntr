@@ -106,7 +106,9 @@ RUN chmod 774 /usr/bin/xdmod-openstack-hypervisor \
     && find /etc/httpd -type d -exec chmod 774 {} + \
     && find /etc/httpd -type f -exec chmod 664 {} +
 
-RUN cp -r /usr/share/xdmod /root/share/xdmod \
+RUN mkdir /root/share \
+    && makdir /root/etc \
+    && cp -r /usr/share/xdmod /root/share/xdmod \
     && cp -r /etc/xdmod /root/etc/xdmod \
     && chmod 777 -R /root/share \
     && chmod 777 -R /root/etc
