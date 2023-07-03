@@ -1,7 +1,6 @@
 FROM moc-xdmod
 
-RUN yum -y install wget
-    && wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+RUN wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
     && chmod +x mariadb_repo_setup
     && ./mariadb_repo_setup
     && yum -y install MariaDB-server
