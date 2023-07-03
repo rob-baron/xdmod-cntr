@@ -1,9 +1,9 @@
 FROM moc-xdmod
 
 RUN wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-    && chmod +x mariadb_repo_setup
-    && ./mariadb_repo_setup
-    && yum -y install MariaDB-server
+RUN chmod +x mariadb_repo_setup
+RUN ./mariadb_repo_setup
+RUN yum -y install MariaDB-server
 
 EXPOSE 8080
 
