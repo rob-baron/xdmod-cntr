@@ -1,9 +1,16 @@
-FROM moc-xdmod
+FROM xdmod-openstack
 
-RUN wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-RUN chmod +x mariadb_repo_setup
-RUN ./mariadb_repo_setup
-RUN yum -y install MariaDB-server
+RUN wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup \
+    && chmod +x mariadb_repo_setup \
+    && ./mariadb_repo_setup \
+    && yum -y install MariaDB-server \
+    && pip install pyTest \
+    && mkdir /app/test
+
+COPY process_hierarchy.py /app/process_hierarchy.py
+COPY moc_db_helper_functions.py /app/moc_db_helper_functions.py
+COPY get_users_from_keycloak.py /app/get_users_from_keycloak.py
+COPY test/*.py /app/test
 
 CMD ["/usr/bin/sleep","10000"]
 
