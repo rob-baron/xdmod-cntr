@@ -5,6 +5,6 @@ RUN chmod +x mariadb_repo_setup
 RUN ./mariadb_repo_setup
 RUN yum -y install MariaDB-server
 
-EXPOSE 8080
+CMD ["/usr/bin/sleep","10000"]
 
 WORKDIR /
