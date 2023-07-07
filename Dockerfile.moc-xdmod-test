@@ -1,9 +1,7 @@
 FROM xdmod-openstack
 
-RUN wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup \
-    && chmod +x mariadb_repo_setup \
-    && ./mariadb_repo_setup \
-    && yum -y install MariaDB-server \
+RUN apt update \
+    && apt install mariadb-server \
     && pip install pyTest \
     && mkdir /app/test
 
