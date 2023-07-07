@@ -1,12 +1,16 @@
 FROM xdmod-openstack
 
-RUN cd /app \
-    && wget https://r.mariadb.com/downloads/mariadb_repo_setup
-RUN apt-get install mariadb-server mariadb-client -y
-RUN pip install pyTest
-RUN mkdir /app/test
+RUN wget https://r.mariadb.com/downloads/mariadb_repo_setup \
+    && chmod 776 mariadb_repo_setup \
+    && ./mariadb_repo_settup \
+    && apt-get install mariadb-server mariadb-client -y \
+    && pip install pyTest \
+    && mkdir /app/test \
+    && mkdir /var/run/mysqld \
+    && chmod 777 /var/run/mysqld
 
 COPY process_hierarchy.py /app/process_hierarchy.py
+COPY delete_hierarchy_db.py /app/delete_hierarchy_db.py
 COPY moc_db_helper_functions.py /app/moc_db_helper_functions.py
 COPY get_users_from_keycloak.py /app/get_users_from_keycloak.py
 COPY test/*.py /app/test
