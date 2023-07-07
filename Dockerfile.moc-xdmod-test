@@ -1,8 +1,5 @@
 FROM xdmod-openstack
 
-RUN wget https://r.mariadb.com/downloads/mariadb_repo_setup
-RUN chmod 776 mariadb_repo_setup
-RUN ./mariadb_repo_settup
 RUN apt-get install mariadb-server mariadb-client -y
 RUN pip install pyTest
 RUN mkdir /app/test
