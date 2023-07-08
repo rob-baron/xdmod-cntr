@@ -5,6 +5,7 @@ RUN pip install pyTest
 RUN mkdir /app/test
 RUN mkdir /var/run/mysqld
 RUN chmod 777 /var/run/mysqld
+RUN chmod 777 /var/run
 
 COPY process_hierarchy.py /app/process_hierarchy.py
 COPY delete_hierarchy_db.py /app/delete_hierarchy_db.py
