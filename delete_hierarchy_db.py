@@ -29,6 +29,8 @@ def delete_db():
     except IOError:
         print("Ensure the xdmod-init.json file is in /etc/xdmod/xdmod_init.json")
 
+    pprint.pprint(config["database"])
+
     cnx = moc_db_helper_functions.connect_to_db(config["database"])
     cursor = cnx.cursor(dictionary=True)
     delete_hdb(cursor)
