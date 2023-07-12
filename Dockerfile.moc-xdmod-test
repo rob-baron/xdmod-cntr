@@ -2,9 +2,11 @@ FROM xdmod-openstack
 
 RUN apt-get install mariadb-server mariadb-client -y \
     && pip install pyTest \
-    && mkdir /app/test
-RUN chmod 777 /var/run
-RUN chmod 777 /run
+    && mkdir /app/test \
+    && chmod 777 /var/run \
+    && chmod 777 /run \
+    && chmod 777 /app \
+    && chmod 777 /app/test
 
 COPY process_hierarchy.py /app/process_hierarchy.py
 COPY delete_hierarchy_db.py /app/delete_hierarchy_db.py
